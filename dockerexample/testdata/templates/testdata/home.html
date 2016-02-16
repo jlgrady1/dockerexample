@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<h3>Hi I'm {{ hostname }} with IP {{ ipaddr }}</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for dataobj in data %}
+            <tr>
+                <td>{{dataobj.key}}</td>
+                <td>{{dataobj.value}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Add New Data</h2>
+<form class="form-inline" method="POST">
+{% csrf_token %}
+{{ data_form.key }}
+{{ data_form.value }}
+<button type="submit" class="btn btn-default">Add</button>
+</form>
+
+{% endblock %}
